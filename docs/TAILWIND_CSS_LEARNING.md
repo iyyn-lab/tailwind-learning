@@ -3,7 +3,7 @@
 ## Next.js Integration, Fundamentals, Configuration, and Tailwind CSS v3 vs v4
 
 **Learning focus:** One-day, production-oriented Tailwind CSS learning
-using Next.js\
+using Next.js  
 **Progress:** Topics 1--3 partially completed. Remaining topics are
 listed at the end so learning can continue later.
 
@@ -11,21 +11,27 @@ listed at the end so learning can continue later.
 
 ## Contents
 
-1.  [Tailwind CSS fundamentals](#1-tailwind-css-fundamentals)
-2.  [How Tailwind works](#2-how-tailwind-works)
-3.  [Next.js integration with Tailwind CSS
-    v4](#3-nextjs-integration-with-tailwind-css-v4)
-4.  [Tailwind CSS v3 vs v4](#4-tailwind-css-v3-vs-v4)
-5.  [Tailwind v4 CSS-first
-    configuration](#5-tailwind-v4-css-first-configuration)
-6.  [Understanding theme namespaces](#6-understanding-theme-namespaces)
-7.  [Configuration examples covered so
-    far](#7-configuration-examples-covered-so-far)
-8.  [Important doubts and
-    clarifications](#8-important-doubts-and-clarifications)
-9.  [Interview questions and
-    answers](#9-interview-questions-and-answers)
+1. [Tailwind CSS fundamentals](#1-tailwind-css-fundamentals)
+2. [How Tailwind works](#2-how-tailwind-works)
+3. [Next.js integration with Tailwind CSS
+
+   v4](#3-nextjs-integration-with-tailwind-css-v4)
+4. [Tailwind CSS v3 vs v4](#4-tailwind-css-v3-vs-v4)
+5. [Tailwind v4 CSS-first
+
+   configuration](#5-tailwind-v4-css-first-configuration)
+6. [Understanding theme namespaces](#6-understanding-theme-namespaces)
+7. [Configuration examples covered so
+
+   far](#7-configuration-examples-covered-so-far)
+8. [Important doubts and
+
+   clarifications](#8-important-doubts-and-clarifications)
+9. [Interview questions and
+
+   answers](#9-interview-questions-and-answers)
 10. [Learning progress and next
+
     topics](#10-learning-progress-and-next-topics)
 
 ------------------------------------------------------------------------
@@ -44,11 +50,13 @@ compose utilities such as `bg-blue-600`, `p-4`, `rounded-lg`, and
 
 ### What does utility-first mean?
 
-Utility-first CSS means using small classes, each responsible for a
+Utility-first CSS mea ns using small classes, each responsible for a  
 particular styling property or purpose.
 
   Utility class      Purpose
+
   ------------------ ------------------
+
   `bg-blue-500`      Background color
   `text-white`       Text color
   `text-xl`          Font size
@@ -64,11 +72,11 @@ particular styling property or purpose.
 
 **Traditional CSS**
 
-``` html
+```html
 <button class="primary-button">Click me</button>
 ```
 
-``` css
+```css
 .primary-button {
   background-color: blue;
   color: white;
@@ -80,7 +88,7 @@ particular styling property or purpose.
 
 **Tailwind CSS**
 
-``` html
+```html
 <button class="bg-blue-600 px-6 py-3 text-white rounded-lg">
   Click me
 </button>
@@ -92,18 +100,18 @@ conventions.
 
 ### Why production projects use Tailwind
 
--   **Development speed:** Compose styles without repeatedly creating
-    one-off CSS classes.
--   **Consistency:** Reuse a shared spacing, color, and typography
-    scale.
--   **Responsive design:** Use breakpoint variants such as `sm:`, `md:`,
-    and `lg:`.
--   **State styling:** Use variants such as `hover:`, `focus:`, and
-    `disabled:`.
--   **Customization:** Define design tokens for an application's visual
-    identity.
--   **CSS output:** Tailwind generates CSS for detected utilities rather
-    than shipping every possible utility.
+- **Development speed:** Compose styles without repeatedly creating
+one-off CSS classes.
+- **Consistency:** Reuse a shared spacing, color, and typography
+scale.
+- **Responsive design:** Use breakpoint variants such as `sm:`, `md:`,
+and `lg:`.
+- **State styling:** Use variants such as `hover:`, `focus:`, and
+`disabled:`.
+- **Customization:** Define design tokens for an application's visual
+identity.
+- **CSS output:** Tailwind generates CSS for detected utilities rather
+than shipping every possible utility.
 
 ------------------------------------------------------------------------
 
@@ -111,13 +119,14 @@ conventions.
 
 The basic build flow is:
 
-1.  A developer writes Tailwind utility classes in HTML, JSX, or TSX
-    files.
-2.  Tailwind scans the source files for class names it can detect.
-3.  Tailwind generates the CSS for the detected utilities.
-4.  The browser loads the generated CSS and applies the styles.
+1. A developer writes Tailwind utility classes in HTML, JSX, or TSX
 
-``` mermaid
+   files.
+2. Tailwind scans the source files for class names it can detect.
+3. Tailwind generates the CSS for the detected utilities.
+4. The browser loads the generated CSS and applies the styles.
+
+```mermaid
 flowchart LR
     A["Next.js source files<br/>page.tsx / components"] --> B["Tailwind CSS build process"]
     C["globals.css<br/>Tailwind import + theme"] --> B
@@ -136,7 +145,7 @@ be generated.
 
 ### Create a new Next.js project
 
-``` bash
+```bash
 npx create-next-app@latest tailwind-learning
 cd tailwind-learning
 npm run dev
@@ -147,7 +156,7 @@ configure Tailwind automatically.
 
 Check installed versions:
 
-``` bash
+```bash
 node -v
 npm -v
 npm list tailwindcss
@@ -155,7 +164,7 @@ npm list tailwindcss
 
 ### Typical Next.js App Router structure
 
-``` text
+```text
 tailwind-learning/
 ├── public/
 ├── src/
@@ -169,8 +178,11 @@ tailwind-learning/
 ```
 
   -----------------------------------------------------------------------
+
   File                                Purpose
+
   ----------------------------------- -----------------------------------
+
   `src/app/globals.css`               Tailwind import, theme definitions,
                                       global and custom CSS
 
@@ -181,14 +193,13 @@ tailwind-learning/
 
   `postcss.config.mjs`                Configures PostCSS plugins
 
-  `package.json`                      Dependencies and project scripts
-  -----------------------------------------------------------------------
+## `package.json`                      Dependencies and project scripts
 
 ### Manual installation in an existing Next.js project
 
 Install the Tailwind v4 packages:
 
-``` bash
+```bash
 npm install tailwindcss @tailwindcss/postcss postcss
 ```
 
@@ -196,9 +207,11 @@ npm install tailwindcss @tailwindcss/postcss postcss
 `package.json` and the lockfile. It does **not** automatically create
 `postcss.config.mjs`.
 
+**PostCSS as a translator.** Browsers do not natively understand Tailwind directives. PostCSS is a tool that runs during your build process to transform modern CSS features into standard CSS. [[1](https://www.google.com/goto?url=CAESdAHEIkXX5EeQqfL-BK6J2VmkM9tq_d4fyQqfu_YJCiyeBtQ3rVwT4CqyRhV-Z54eXU--B8-TFu2HjJCNiOMeLvz8rKb3wJoQaY2wDkWd3E8-cLFHgvyuIQIGib1WIyCpii62scbvgh9yvEZzLY1sJAwxcLLI)]
+
 Create `postcss.config.mjs` manually in the project root:
 
-``` js
+```js
 const config = {
   plugins: {
     "@tailwindcss/postcss": {},
@@ -210,13 +223,13 @@ export default config;
 
 Add the Tailwind import to `src/app/globals.css`:
 
-``` css
-@import "tailwindcss";
+```css
+@import "tailwindcss";q
 ```
 
 Import the global stylesheet from the root layout:
 
-``` tsx
+```tsx
 import "./globals.css";
 
 export default function RootLayout({
@@ -234,7 +247,7 @@ export default function RootLayout({
 
 Run or restart the development server:
 
-``` bash
+```bash
 npm run dev
 ```
 
@@ -244,7 +257,7 @@ npm run dev
 
 ### Test the installation
 
-``` tsx
+```tsx
 export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -277,8 +290,11 @@ Tailwind v4 changes the default approach from JavaScript configuration
 to CSS-first configuration.
 
   ---------------------------------------------------------------------------
+
   Area                    Tailwind v3              Tailwind v4
+
   ----------------------- ------------------------ --------------------------
+
   Default configuration   JavaScript config        CSS-first configuration
   style                   (`tailwind.config.js`)   
 
@@ -296,14 +312,15 @@ to CSS-first configuration.
 
   Legacy config discovery Config conventionally    Legacy JS config is not
                           discovered by the v3     automatically detected
-                          setup                    
+                      setup                    
+
   ---------------------------------------------------------------------------
 
 ### Tailwind v3 CSS setup
 
 A typical v3 global stylesheet contains:
 
-``` css
+```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -316,7 +333,7 @@ utility layer.
 
 In v4, use one import:
 
-``` css
+```css
 @import "tailwindcss";
 ```
 
@@ -333,13 +350,13 @@ maintaining or migrating a project that needs legacy configuration.
 
 ### How to load a legacy JavaScript config in v4
 
-1.  Create or retain `tailwind.config.js` in the project.
-2.  Add the legacy configuration.
-3.  Load it from the CSS entry point using `@config`.
+1. Create or retain `tailwind.config.js` in the project.
+2. Add the legacy configuration.
+3. Load it from the CSS entry point using `@config`.
 
 Example:
 
-``` js
+```js
 // tailwind.config.js
 export default {
   theme: {
@@ -352,7 +369,7 @@ export default {
 };
 ```
 
-``` css
+```css
 /* src/app/globals.css */
 @import "tailwindcss";
 @config "../../tailwind.config.js";
@@ -383,11 +400,11 @@ and generates corresponding utility classes and variants.
 
 Example:
 
-``` css
+```css
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2563eb;
+ -primary --color: #2563eb;
   --color-secondary: #16a34a;
 
   --font-display: "Inter", sans-serif;
@@ -404,7 +421,7 @@ across many components.
 
 For example:
 
-``` css
+```css
 @theme {
   --color-primary: #9333ea;
 }
@@ -418,14 +435,16 @@ Utilities that use `bg-primary` now use the updated value.
 
 Consider this declaration:
 
-``` css
+```css
 --color-primary: #2563eb;
 ```
 
 It has three meaningful parts:
 
   Part         Meaning
+
   ------------ --------------------------------------------------
+
   `--color-`   Theme namespace; identifies the token as a color
   `primary`    Custom token name chosen by the developer
   `#2563eb`    Actual color value
@@ -436,8 +455,11 @@ Because it uses the `--color-` namespace, Tailwind can generate color
 utilities from it.
 
   -----------------------------------------------------------------------
+
   Theme variable                      Example utility classes
+
   ----------------------------------- -----------------------------------
+
   `--color-primary`                   `bg-primary`, `text-primary`,
                                       `border-primary`
 
@@ -446,12 +468,11 @@ utilities from it.
 
   `--font-display`                    `font-display`
 
-  `--breakpoint-3xl`                  `3xl:` responsive variant
-  -----------------------------------------------------------------------
+## `--breakpoint-3xl`                  `3xl:` responsive variant
 
 Example JSX:
 
-``` tsx
+```tsx
 <div className="bg-primary text-white">
   Hello Tailwind!
 </div>
@@ -461,9 +482,9 @@ Tailwind applies the `#2563eb` color as the background.
 
 **Key takeaway:**
 
--   `--color-` = namespace / token type.
--   `primary` = custom token name.
--   `#2563eb` = token value.
+- `--color-` = namespace / token type.
+- `primary` = custom token name.
+- `#2563eb` = token value.
 
 ------------------------------------------------------------------------
 
@@ -474,7 +495,7 @@ explored in more detail in the next learning session.
 
 ### Custom colors
 
-``` css
+```css
 @theme {
   --color-primary: #2563eb;
   --color-secondary: #16a34a;
@@ -483,14 +504,14 @@ explored in more detail in the next learning session.
 
 Usage:
 
-``` tsx
+```tsx
 <div className="bg-primary text-white">Primary panel</div>
 <p className="text-secondary">Success message</p>
 ```
 
 ### Custom fonts
 
-``` css
+```css
 @theme {
   --font-display: "Inter", sans-serif;
 }
@@ -498,7 +519,7 @@ Usage:
 
 Usage:
 
-``` tsx
+```tsx
 <h1 className="font-display">Welcome</h1>
 ```
 
@@ -508,7 +529,7 @@ for production font loading.
 
 ### Custom breakpoints
 
-``` css
+```css
 @theme {
   --breakpoint-3xl: 120rem;
 }
@@ -516,7 +537,7 @@ for production font loading.
 
 Usage:
 
-``` tsx
+```tsx
 <div className="bg-blue-500 3xl:bg-purple-500">
   Responsive content
 </div>
@@ -531,7 +552,7 @@ Tailwind provides a default spacing scale used by utilities such as
 
 The base spacing theme variable can be customized:
 
-``` css
+```css
 @theme {
   --spacing: 4px;
 }
@@ -564,7 +585,7 @@ option is supported in v4.
 
 No. The v3 setup commonly used:
 
-``` css
+```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -572,7 +593,7 @@ No. The v3 setup commonly used:
 
 The v4 setup uses:
 
-``` css
+```css
 @import "tailwindcss";
 ```
 
@@ -701,43 +722,43 @@ generate matching utility classes and variants.
 
 ### Completed
 
--   [x] Tailwind CSS fundamentals
--   [x] Utility-first CSS
--   [x] Traditional CSS vs Tailwind CSS
--   [x] Tailwind's source scanning and CSS generation flow
--   [x] Next.js integration basics
--   [x] Manual Tailwind v4 installation
--   [x] PostCSS configuration
--   [x] `globals.css` and root layout integration
--   [x] Tailwind v3 vs v4 fundamentals
--   [x] `tailwind.config.js` in v4: optional and loaded using `@config`
--   [x] Introduction to `@theme`
--   [x] Theme namespaces, custom token names, and values
--   [x] Introduction to custom colors, fonts, spacing, and breakpoints
+- [x] Tailwind CSS fundamentals
+- [x] Utility-first CSS
+- [x] Traditional CSS vs Tailwind CSS
+- [x] Tailwind's source scanning and CSS generation flow
+- [x] Next.js integration basics
+- [x] Manual Tailwind v4 installation
+- [x] PostCSS configuration
+- [x] `globals.css` and root layout integration
+- [x] Tailwind v3 vs v4 fundamentals
+- [x] `tailwind.config.js` in v4: optional and loaded using `@config`
+- [x] Introduction to `@theme`
+- [x] Theme namespaces, custom token names, and values
+- [x] Introduction to custom colors, fonts, spacing, and breakpoints
 
 ### Remaining topics
 
--   [ ] `@theme` vs `:root` in depth
--   [ ] Custom colors, fonts, spacing, and breakpoints in depth
--   [ ] Core utilities: sizing, spacing, Flexbox, and Grid
--   [ ] Responsive design and mobile-first breakpoints
--   [ ] Hover, focus, active, disabled, and group variants
--   [ ] Dark mode
--   [ ] Transitions and transforms
--   [ ] Custom keyframe animations
--   [ ] Reusable component styling patterns
--   [ ] Production best practices and optimization
--   [ ] Practical UI implementation
--   [ ] Final interview revision
+- [ ] `@theme` vs `:root` in depth
+- [ ] Custom colors, fonts, spacing, and breakpoints in depth
+- [ ] Core utilities: sizing, spacing, Flexbox, and Grid
+- [ ] Responsive design and mobile-first breakpoints
+- [ ] Hover, focus, active, disabled, and group variants
+- [ ] Dark mode
+- [ ] Transitions and transforms
+- [ ] Custom keyframe animations
+- [ ] Reusable component styling patterns
+- [ ] Production best practices and optimization
+- [ ] Practical UI implementation
+- [ ] Final interview revision
 
 ------------------------------------------------------------------------
 
 ## Reference
 
--   Tailwind CSS documentation: https://tailwindcss.com/docs
--   Tailwind CSS v4 upgrade guide:
-    https://tailwindcss.com/docs/upgrade-guide
--   Next.js documentation: https://nextjs.org/docs
+- Tailwind CSS documentation: https://tailwindcss.com/docs
+- Tailwind CSS v4 upgrade guide:
+https://tailwindcss.com/docs/upgrade-guide
+- Next.js documentation: https://nextjs.org/docs
 
 > **Note:** Tailwind CSS APIs and setup instructions can change between
 > releases. Check the documentation for the exact version installed in
